@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REACH 2.0 - Recovery Starts Here</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal': {
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .screen {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease-in-out;
+        }
+        .screen.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #14b8a6 0%, #14b8a6 16.67%, #e5e7eb 16.67%, #e5e7eb 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+    <div class="max-w-sm mx-auto bg-white min-h-screen shadow-lg">
+        
+        <!-- Welcome Screen -->
+        <section id="welcome" class="screen active p-8 text-center min-h-screen flex flex-col justify-center">
+            <div class="mb-8">
+                <div class="w-20 h-20 bg-teal-500 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <span class="text-3xl text-white">💊</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">Recovery Starts Here</h1>
+                <p class="text-gray-600 text-lg">Scan your first test, earn your first reward</p>
+            </div>
+            <button onclick="navigateTo('intake')" class="w-full bg-teal-500 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-teal-600 transition-colors">
+                Begin in ED
+            </button>
+        </section>
+
+        <!-- Quick Intake Screen -->
+        <section id="intake" class="screen p-8 min-h-screen">
+            <div class="mb-8">
+                <button onclick="navigateTo('welcome')" class="text-teal-500 mb-4">← Back</button>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Quick Intake</h2>
+            </div>
+            
+            <div class="space-y-6 mb-8">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                    <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500" placeholder="Enter your name">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Medicaid ID</label>
+                    <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500" placeholder="Enter Medicaid ID">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ethnicity</label>
+                    <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+                        <option>Select ethnicity</option>
+                        <option>Hispanic or Latino</option>
+                        <option>Not Hispanic or Latino</option>
+                        <option>Prefer not to answer</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button onclick="navigateTo('record')" class="w-full bg-teal-500 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-teal-600 transition-colors">
+                Continue
+            </button>
+        </section>
+
+        <!-- Record Test Screen -->
+        <section id="record" class="screen p-8 text-center min-h-screen flex flex-col justify-center">
+            <div class="mb-8">
+                <button onclick="navigateTo('intake')" class="text-teal-500 mb-4 float-left">← Back</button>
+                <div class="clear-both"></div>
+                <div class="w-32 h-32 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-center border-4 border-dashed border-gray-300">
+                    <span class="text-4xl">📷</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Record Test</h2>
+                <p class="text-gray-600 text-lg">Tap to record saliva test</p>
+            </div>
+            <button onclick="navigateTo('success')" class="w-full bg-teal-500 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-teal-600 transition-colors">
+                Start Recording
+            </button>
+        </section>
+
+        <!-- Success Screen -->
+        <section id="success" class="screen p-8 text-center min-h-screen flex flex-col justify-center">
+            <div class="mb-8">
+                <div class="text-8xl mb-6">🎉</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Nice work!</h2>
+                <p class="text-gray-600 text-lg">You earned 10 points</p>
+                <div class="mt-6 p-4 bg-teal-50 rounded-lg">
+                    <span class="text-teal-700 font-semibold">+10 Points Added</span>
+                </div>
+            </div>
+            <button onclick="navigateTo('wallet')" class="w-full bg-teal-500 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-teal-600 transition-colors">
+                See Wallet
+            </button>
+        </section>
+
+        <!-- Wallet Screen -->
+        <section id="wallet" class="screen p-8 min-h-screen">
+            <div class="mb-8">
+                <button onclick="navigateTo('success')" class="text-teal-500 mb-4">← Back</button>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Your Reward Wallet</h2>
+            </div>
+            
+            <div class="bg-gradient-to-r from-teal-500 to-teal-600 rounded-xl p-6 text-white mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-lg">Total Points</span>
+                    <span class="text-3xl font-bold">10</span>
+                </div>
+                <div class="mb-2">
+                    <div class="flex justify-between text-sm">
+                        <span>Streak 2 / 12</span>
+                        <span>17%</span>
+                    </div>
+                    <div class="w-full bg-teal-400 rounded-full h-2 mt-2">
+                        <div class="bg-white h-2 rounded-full progress-bar" style="width: 17%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4 mb-8">
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center">
+                        <span class="text-2xl mr-3">🏆</span>
+                        <div>
+                            <p class="font-semibold">First Test Complete</p>
+                            <p class="text-sm text-gray-600">Completed today</p>
+                        </div>
+                    </div>
+                    <span class="text-teal-500 font-semibold">+10</span>
+                </div>
+            </div>
+            
+            <button onclick="navigateTo('support')" class="w-full bg-teal-500 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-teal-600 transition-colors">
+                Go to Chat
+            </button>
+        </section>
+
+        <!-- Support Group Screen -->
+        <section id="support" class="screen p-8 min-h-screen">
+            <div class="mb-8">
+                <button onclick="navigateTo('wallet')" class="text-teal-500 mb-4">← Back</button>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Support Group</h2>
+            </div>
+            
+            <div class="space-y-4 mb-8">
+                <div class="bg-gray-100 rounded-lg p-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                            C
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm text-gray-600">Cam (MSW)</p>
+                            <p class="text-gray-800">Great first test!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-teal-50 rounded-lg p-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                            A
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm text-gray-600">Alex (Peer)</p>
+                            <p class="text-gray-800">🎉</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex border border-gray-300 rounded-lg">
+                <input type="text" placeholder="Type a message..." class="flex-1 p-3 border-0 rounded-l-lg focus:ring-2 focus:ring-teal-500">
+                <button class="bg-teal-500 text-white px-4 rounded-r-lg">Send</button>
+            </div>
+            
+            <button onclick="navigateTo('mentor')" class="w-full bg-teal-500 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-teal-600 transition-colors mt-6">
+                Next Steps
+            </button>
+        </section>
+
+        <!-- Peer Mentor Path Screen -->
+        <section id="mentor" class="screen p-8 min-h-screen">
+            <div class="mb-8">
+                <button onclick="navigateTo('support')" class="text-teal-500 mb-4">← Back</button>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Peer Mentor Path</h2>
+            </div>
+            
+            <div class="space-y-4 mb-8">
+                <div class="flex items-center space-x-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                    <span class="text-2xl">✅</span>
+                    <div>
+                        <p class="font-semibold text-gray-800">8 negative tests</p>
+                        <p class="text-sm text-gray-600">Completed</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                    <span class="text-2xl">🕑</span>
+                    <div>
+                        <p class="font-semibold text-gray-800">Training scheduled</p>
+                        <p class="text-sm text-gray-600">Next: March 15th</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <span class="text-2xl">🚀</span>
+                    <div>
+                        <p class="font-semibold text-gray-800">Practicum</p>
+                        <p class="text-sm text-gray-600">Coming soon</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button onclick="navigateTo('exit')" class="w-full bg-teal-500 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-teal-600 transition-colors">
+                Finish
+            </button>
+        </section>
+
+        <!-- Exit Screen -->
+        <section id="exit" class="screen p-8 text-center min-h-screen flex flex-col justify-center">
+            <div class="mb-8">
+                <div class="w-20 h-20 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <span class="text-3xl text-white">🌟</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Ready to change your story?</h2>
+                <p class="text-gray-600 text-lg">Tap Join and we'll text your first test.</p>
+            </div>
+            <button onclick="navigateTo('welcome')" class="w-full bg-teal-500 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:bg-teal-600 transition-colors mb-4">
+                Join
+            </button>
+            <button onclick="navigateTo('welcome')" class="w-full text-teal-500 py-2">
+                Start Demo Again
+            </button>
+        </section>
+
+    </div>
+
+    <script>
+        // Analytics function
+        function logEvent(action, screen) {
+            console.log(`[REACH Analytics] ${action} - Screen: ${screen} - Time: ${new Date().toISOString()}`);
+        }
+
+        // Navigation function with smooth transitions
+        function navigateTo(screenId) {
+            const currentScreen = document.querySelector('.screen.active');
+            const nextScreen = document.getElementById(screenId);
+            
+            // Log the navigation event
+            logEvent('NAVIGATE', screenId.toUpperCase());
+            
+            // Fade out current screen
+            currentScreen.classList.remove('active');
+            
+            // Fade in next screen after a short delay
+            setTimeout(() => {
+                nextScreen.classList.add('active');
+                nextScreen.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 150);
+        }
+
+        // Log button clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON') {
+                const buttonText = e.target.textContent.trim();
+                const currentScreen = document.querySelector('.screen.active').id;
+                logEvent(`BUTTON_CLICK: ${buttonText}`, currentScreen.toUpperCase());
+            }
+        });
+
+        // Log page load
+        window.addEventListener('load', function() {
+            logEvent('PAGE_LOAD', 'WELCOME');
+        });
+    </script>
+</body>
+</html>
